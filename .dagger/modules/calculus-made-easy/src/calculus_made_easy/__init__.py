@@ -1,20 +1,18 @@
 from __future__ import annotations
 
 from dagger import function, object_type
-from dagger_clients.core import Container, Directory, Workspace, core
+from dagger_clients.core import Container, Directory, File, Workspace, core
 
 
 @object_type
-class CalcMadeEasy:
+class CalculusMadeEasy:
     source: Directory
-    base_image_address: str
 
     @classmethod
     def create(
         cls,
         ws: Workspace,
-        base_image_address: str = "alpine:3.24",
-    ) -> CalcMadeEasy:
+    ) -> CalculusMadeEasy:
         return cls(
             source=ws.directory(
                 "/",
@@ -24,16 +22,20 @@ class CalcMadeEasy:
                 ],
                 gitignore=True,
             ),
-            base_image_address=base_image_address,
         )
 
     @function
     def container(self) -> Container:
-        """A container with the workspace source, ready to build."""
         return (
             core()
             .container()
-            .from_(self.base_image_address)
+            .from_("debian:trixie-slim")
+            .with_exec(["apt-get", "update"])
+            .with_exec(["apt-get", "install", "-y", "--no-install-recommends", "texlive-latex-extra", "latexmk"])
             .with_directory("/src", self.source)
             .with_workdir("/src")
         )
+
+    @function
+    def pdf(self) -> File:
+        return self.container().with_exec(["latexmk", "-pdf", "calculus-made-easy.tex"]).file("calculus-made-easy.pdf")

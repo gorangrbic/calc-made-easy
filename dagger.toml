@@ -4,9 +4,9 @@ source = "github.com/dagger/python-sdk@v1.8.0"
 [sdks.python]
 module = "python-sdk"
 
-[modules.calc-made-easy]
-source = ".dagger/modules/calc-made-easy"
+[modules.calculus-made-easy]
+source = ".dagger/modules/calculus-made-easy"
 
-[sdks.python.scopes.".dagger/modules/calc-made-easy"]
+[sdks.python.scopes.".dagger/modules/calculus-made-easy"]
 is-module = true
-name = "calc-made-easy"
+name = "calculus-made-easy"

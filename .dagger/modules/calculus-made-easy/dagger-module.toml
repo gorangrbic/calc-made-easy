@@ -1,4 +1,4 @@
-name = "calc-made-easy"
+name = "calculus-made-easy"
 
 [entrypoint]
   kind = "dang"

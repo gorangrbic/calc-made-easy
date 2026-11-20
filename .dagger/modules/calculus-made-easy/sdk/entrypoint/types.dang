@@ -3,15 +3,16 @@
 type ModuleTypes {
   pub all: [TypeDef!]! {
     [
-      typeDef.withObject("CalcMadeEasy")
+      typeDef.withObject("CalculusMadeEasy")
         .withFunction(
           function("container", typeDef.withObject("Container"))
-            .withDescription("A container with the workspace source, ready to build.")
+        )
+        .withFunction(
+          function("pdf", typeDef.withObject("File"))
         )
         .withConstructor(
-          function("", typeDef.withObject("CalcMadeEasy"))
+          function("", typeDef.withObject("CalculusMadeEasy"))
             .withArg("ws", typeDef.withObject("Workspace"), description: "A Dagger workspace detected from the current working directory or\nconstructed from a Directory.")
-            .withArg("base_image_address", typeDef.withKind(TypeDefKind.STRING_KIND), defaultValue: ("\"alpine:3.24\"" :: Dagger.JSON!))
         ),
     ]
   }
