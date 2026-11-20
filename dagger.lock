@@ -7,3 +7,5 @@
 ["","git-latest",["github.com/dagger/sdk-helpers",["version","v1.0.9"]],"refs/tags/v1.0.9"]
 ["","git-sha",["github.com/dagger/python-sdk","refs/tags/v1.8.0"],"9394f7454139f1ee2ca35be20e585b1e54f06cc2"]
 ["","git-sha",["github.com/dagger/sdk-helpers","refs/tags/v1.0.9"],"daffbc01a1b3f3df7b1c417a7d2c83cd06d1bd33"]
+["","oci-sha",["docker.io/library/golang:1.25-alpine"],"sha256:1ae0735f00daffa3aaf1363a5184c0d2dc55c78e3db4ec70241cdac97bf84b59"]
+["","oci-sha",["ghcr.io/astral-sh/uv:python3.14-alpine"],"sha256:cf4d33eb056b454a922b80e3594c0621ac56e83e118ec4e7415c58ae65466ede"]

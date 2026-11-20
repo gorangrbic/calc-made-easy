@@ -3,3 +3,10 @@ source = "github.com/dagger/python-sdk@v1.8.0"
 
 [sdks.python]
 module = "python-sdk"
+
+[modules.calc-made-easy]
+source = ".dagger/modules/calc-made-easy"
+
+[sdks.python.scopes.".dagger/modules/calc-made-easy"]
+is-module = true
+name = "calc-made-easy"

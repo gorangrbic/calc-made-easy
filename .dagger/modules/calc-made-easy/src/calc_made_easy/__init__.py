@@ -1,0 +1,39 @@
+from __future__ import annotations
+
+from dagger import function, object_type
+from dagger_clients.core import Container, Directory, Workspace, core
+
+
+@object_type
+class CalcMadeEasy:
+    source: Directory
+    base_image_address: str
+
+    @classmethod
+    def create(
+        cls,
+        ws: Workspace,
+        base_image_address: str = "alpine:3.24",
+    ) -> CalcMadeEasy:
+        return cls(
+            source=ws.directory(
+                "/",
+                exclude=[
+                    "**/.dagger",
+                    "**/.git",
+                ],
+                gitignore=True,
+            ),
+            base_image_address=base_image_address,
+        )
+
+    @function
+    def container(self) -> Container:
+        """A container with the workspace source, ready to build."""
+        return (
+            core()
+            .container()
+            .from_(self.base_image_address)
+            .with_directory("/src", self.source)
+            .with_workdir("/src")
+        )

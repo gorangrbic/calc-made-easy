@@ -1,0 +1,5 @@
+name = "calc-made-easy"
+
+[entrypoint]
+  kind = "dang"
+  source = "./sdk/entrypoint"
