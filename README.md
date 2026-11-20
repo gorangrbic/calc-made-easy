@@ -4,8 +4,8 @@
 
 ## Requirements
 
-- [Dagger CLI](https://docs.dagger.io)
 - Docker or Podman
+- Dagger (optional)
 
 ## Building with Dagger
 
