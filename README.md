@@ -27,17 +27,16 @@ Strip `--no-cache` and `> out/run.log 2>&1` when not testing.
 
 ```sh
 podman build --no-cache --format docker -t calculus-made-easy -f Containerfile .  && \
-podman run --rm --userns=keep-id -v "$PWD":/src calculus-made-easy sh -c 'for i in 1 2 3; do pdflatex -output-directory=out calculus-made-easy.tex; done' \
+podman run --rm --userns=keep-id -v "$PWD":/src -w /src/book calculus-made-easy sh -c 'for i in 1 2 3; do pdflatex -output-directory=../out calculus-made-easy.tex; done' \
 > out/run.log 2>&1
 ```
 
 ## Layout
 
-- `calculus-made-easy.tex`: the book
-- `images/*.pdf`: figures
+- `book/`: book tex and accompanying figures
 - `.dagger/*`: dagger workspace
 - `Containerfile`: Minimal alpine container
-- `Actions`: gh action for building the image
+- `.github/`: gh workflows
 
 ## Security
 
