@@ -31,6 +31,7 @@ class CalculusMadeEasy:
             .container()
             .from_("ghcr.io/gorangrbic/calculus-made-easy:latest")
             .with_directory("/src", self.source, owner="tex")
+            .with_workdir("/src/book")
         )
 
     @function
