@@ -27,8 +27,9 @@ class CalculusMadeEasy:
     @function
     def container(self) -> Container:
         return (
-            self.source
-            .docker_build(dockerfile="Containerfile")
+            core()
+            .container()
+            .from_("ghcr.io/gorangrbic/calculus-made-easy:latest")
             .with_directory("/src", self.source, owner="tex")
         )
 

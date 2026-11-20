@@ -37,10 +37,11 @@ podman run --rm --userns=keep-id -v "$PWD":/src calculus-made-easy sh -c 'for i 
 - `images/*.pdf`: figures
 - `.dagger/*`: dagger workspace
 - `Containerfile`: Minimal alpine container
+- `Actions`: gh action for building the image
 
 ## Security
 
-Used Dockle and Hadolint because google told me to:
+Used Scout, Dockle and Hadolint because google told me to:
 
 ```sh
 podman save -o ./out/tex-live-image.tar localhost/calculus-made-easy:latest
@@ -48,6 +49,8 @@ podman save -o ./out/tex-live-image.tar localhost/calculus-made-easy:latest
 podman run --rm -v "$PWD"/out:/work docker.io/goodwithtech/dockle:latest --input /work/tex-live-image.tar
 
 podman run --rm -i docker.io/hadolint/hadolint < Containerfile
+
+podman run --rm -u root -v "$XDG_RUNTIME_DIR/docker.sock":/var/run/docker.sock -v "$PWD"/out:/work --env-file docker-scout.env.example docker.io/docker/scout-cli cves archive:///work/tex-live-image.tar
 ```
 
 ## License
