@@ -29,13 +29,15 @@ class CalculusMadeEasy:
         return (
             self.source
             .docker_build(dockerfile="Containerfile")
-            .with_directory("/src", self.source)
+            .with_directory("/src", self.source, owner="tex")
         )
 
     @function
     def pdf(self) -> File:
         return (
             self.container()
-            .with_exec(["latexmk", "-pdf", "calculus-made-easy.tex"])
+            .with_exec(["pdflatex", "calculus-made-easy.tex"])
+            .with_exec(["pdflatex", "calculus-made-easy.tex"])
+            .with_exec(["pdflatex", "calculus-made-easy.tex"])
             .file("calculus-made-easy.pdf")
         )
