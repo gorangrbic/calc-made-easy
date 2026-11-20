@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dagger import function, object_type
-from dagger_clients.core import Container, Directory, File, Workspace
+from dagger_clients.core import Container, Directory, File, Workspace, core
 
 
 @object_type
