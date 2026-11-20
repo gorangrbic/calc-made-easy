@@ -1,4 +1,4 @@
-name: image
+name: tex live image builder
 
 on:
   workflow_dispatch:
