@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dagger import function, object_type
-from dagger_clients.core import Container, Directory, File, Workspace, core
+from dagger_clients.core import Container, Directory, File, Workspace
 
 
 @object_type
@@ -27,15 +27,15 @@ class CalculusMadeEasy:
     @function
     def container(self) -> Container:
         return (
-            core()
-            .container()
-            .from_("debian:trixie-slim")
-            .with_exec(["apt-get", "update"])
-            .with_exec(["apt-get", "install", "-y", "--no-install-recommends", "texlive-latex-extra", "latexmk"])
+            self.source
+            .docker_build(dockerfile="Containerfile")
             .with_directory("/src", self.source)
-            .with_workdir("/src")
         )
 
     @function
     def pdf(self) -> File:
-        return self.container().with_exec(["latexmk", "-pdf", "calculus-made-easy.tex"]).file("calculus-made-easy.pdf")
+        return (
+            self.container()
+            .with_exec(["latexmk", "-pdf", "calculus-made-easy.tex"])
+            .file("calculus-made-easy.pdf")
+        )
