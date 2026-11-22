@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'book/**'
+  workflow_dispatch:
 
 jobs:
   build-pdf:
