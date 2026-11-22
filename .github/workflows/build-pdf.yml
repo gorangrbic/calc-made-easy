@@ -1,0 +1,21 @@
+name: build-pdf
+
+on:
+  push:
+    branches:
+      - main
+      - 'book/**'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v7
+      - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - uses: dagger/dagger-for-github@v8.4.1
+        with:
+          version: v1.0.0-beta.25
+          call: calculus-made-easy pdf export --path=out/calculus-made-easy.pdf
